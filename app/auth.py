@@ -71,7 +71,7 @@ def reset_password_request():
         email = request.form.get('email')
         user = User.query.filter_by(email=email).first_or_404()
         token = s.dumps(email, salt='password-reset')
-        msg = Message('Reset Your Password', sender='4fyield@gmail.com', recipients=[email])
+        msg = Message('Altere sua senha', sender='4fyield@gmail.com', recipients=[email])
         link = url_for('auth.reset_password', token=token, _external=True)
         msg.body = f'Link para alterar senha {link}'
         mail.send(msg)
@@ -125,7 +125,7 @@ def reset_password(token):
 def dashboard():
     if 'user_id' in session:
         user = User.query.filter_by(id=session['user_id']).first()
-        return f'<h1>Bem vindo {user.name}!, Você conhece o Mário?</h1>'
+        return f'<h1>Bem vindo {user.name}!</h1>'
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
