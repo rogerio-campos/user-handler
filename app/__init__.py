@@ -34,8 +34,11 @@ def create_app():
         db.create_all()
 
     from .auth import auth
+    from .home import home
+
     # app.register_blueprint(auth)
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(home, url_prefix='/')
 
     return app
 

@@ -8,10 +8,6 @@ from . import db, mail, s
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/', methods=['GET', 'POST'])
-def welcome():
-    return 'Welcome to ForYield'
-
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':

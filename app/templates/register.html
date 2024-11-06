@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registrar</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
+        <h2>Registre-se</h2>
         <form action="{{ url_for('auth.register') }}" method="POST">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name">Nome</label>
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="form-group">
@@ -19,12 +19,12 @@
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">Senha</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Register</button>
+            <button type="submit">Registrar</button>
         </form>
-        <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a>.</p>
+        <p>Já tem uma conta? <a href="{{ url_for('auth.login') }}">Faça o login aqui</a>.</p>
     </div>
 </body>
 </html>

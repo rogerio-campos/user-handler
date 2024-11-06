@@ -1,0 +1,12 @@
+<!-- templates/welcome.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seja bem vindo à ForYield</title>
+</head>
+<body>
+    <h1>Seja bem vindo à ForYield!! Por favor, faça o login ou registre-se</h1>
+    <p><a> Faça seu </a> <a href="{{ url_for('auth.login') }}">Login</a> ou <a href="{{ url_for('auth.register') }}">Registre-se</a> </p>
+</body>
+</html>
