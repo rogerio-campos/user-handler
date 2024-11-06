@@ -54,15 +54,15 @@ def confirm_email(token):
     try:
         email = s.loads(token, salt='email-confirm', max_age=3600)
     except SignatureExpired:
-        return '<h1>The token is expired!</h1>'
+        return '<h1>Seu token expirou!</h1>'
     
     user = User.query.filter_by(email=email).first_or_404()
     if user.confirmed:
-        flash('Account already confirmed. Please login.')
+        flash('Conta já confirmada. Faça o Login.')
     else:
         user.confirmed = True
         db.session.commit()
-        flash('You have confirmed your account. Thanks!')
+        flash('Conta confirmada. Obrigado!')
     return redirect(url_for('auth.login'))
 
 @auth.route('/reset_password_request', methods=['GET', 'POST'])
@@ -73,9 +73,9 @@ def reset_password_request():
         token = s.dumps(email, salt='password-reset')
         msg = Message('Reset Your Password', sender='4fyield@gmail.com', recipients=[email])
         link = url_for('auth.reset_password', token=token, _external=True)
-        msg.body = f'Your password reset link is {link}'
+        msg.body = f'Link para alterar senha {link}'
         mail.send(msg)
-        flash('Check your email for the password reset link')
+        flash('Verifique seu email, enviamos um link para alteração de senha')
         return redirect(url_for('auth.login'))
     return render_template('reset_password_request.html')
 
@@ -97,7 +97,7 @@ def reset_password(token):
         password = request.form.get('password')
         user.password = generate_password_hash(password, method='pbkdf2:sha256')
         db.session.commit()
-        flash('Your password has been updated!')
+        flash('Sua senha foi alterada!')
         return redirect(url_for('auth.login'))
     
     return render_template('reset_password.html', token=token)
@@ -125,12 +125,12 @@ def reset_password(token):
 def dashboard():
     if 'user_id' in session:
         user = User.query.filter_by(id=session['user_id']).first()
-        return f'<h1>Welcome {user.name}!</h1>'
+        return f'<h1>Bem vindo {user.name}!, Você conhece o Mário?</h1>'
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
 def logout():
     session.pop('user_id', None)
-    flash('You have been logged out.')
+    flash('Você não está mais logado.')
     return redirect(url_for('auth.login'))
 
